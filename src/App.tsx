@@ -23,6 +23,8 @@ import CalendarPage from "./pages/calendar/CalendarPage"; // создайте э
 import CalendardNotFound from "./pages/calendar/CalendarNotFound";
 import FolderPage from "./pages/folder/MainPage";
 import MainNotFound from "./pages/folder/MainNotFound";
+import ProfilePage from "./pages/profile/ProfilePage";
+import ProfileNotFound from "./pages/profile/ProfileNotFound";
 const queryClient = new QueryClient();
 
 
@@ -82,6 +84,15 @@ const App = () => (
               </ProtectedRoute>
             } 
           />
+
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            } 
+          />
           
           {/* Community - если еще нужно оставить */}
           <Route 
@@ -120,6 +131,7 @@ const App = () => (
           <Route path="/dashboard/*" element={<DashboardNotFound />} />
           <Route path="/calendar/*" element={<CalendardNotFound />} />
           <Route path="/folder/*" element={<MainNotFound />} />
+          <Route path="/profile/*" element={<ProfileNotFound />} />
 
           
           {/* Глобальный 404 */}

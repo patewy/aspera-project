@@ -6,57 +6,58 @@ import CommunityCard from "@/components/dashboard/CommunityCard";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
-      {/* Мобильная версия (stack layout) */}
-      <div className="flex flex-col gap-4 md:hidden">
-        <div className="w-full">
+    // Убираем min-h-screen, используем фиксированную высоту viewport
+    <div className="h-screen bg-background overflow-hidden p-2 md:p-3 lg:p-4">
+      {/* Мобильная версия (stack layout) - теперь без скролла */}
+      <div className="flex flex-col h-full gap-2 md:hidden">
+        <div className="flex-1 min-h-0"> {/* Добавляем min-h-0 для правильного flex-скейла */}
           <ProfileCard />
         </div>
         
-        <div className="w-full">
+        <div className="flex-1 min-h-0">
           <CalendarCard />
         </div>
         
-        <div className="w-full">
+        <div className="flex-1 min-h-0">
           <PlaceholderCard />
         </div>
         
-        <div className="w-full">
+        <div className="flex-1 min-h-0">
           <NotebookCard />
         </div>
         
-        <div className="w-full">
+        <div className="flex-1 min-h-0">
           <CommunityCard />
         </div>
       </div>
       
-      {/* Десктопная версия (grid layout) */}
-      <div className="hidden md:grid md:grid-cols-12 md:gap-4 lg:gap-6 min-h-[calc(100vh-2rem)]">
-        {/* Profile Card - 3 колонки из 12 на десктопе */}
-        <div className="md:col-span-3 xl:col-span-2 h-full">
+      {/* Десктопная версия (grid layout) - занимает всю высоту и ширину */}
+      <div className="hidden md:grid md:grid-cols-12 md:gap-3 lg:gap-4 h-full">
+        {/* Profile Card - адаптивная ширина */}
+        <div className="md:col-span-3 lg:col-span-2 h-full">
           <div className="h-full">
             <ProfileCard />
           </div>
         </div>
         
-        {/* Основная область - 9 колонок из 12 */}
-        <div className="md:col-span-9 xl:col-span-10 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 h-full">
-            {/* Верхний ряд */}
-            <div className="h-full min-h-[400px] lg:min-h-[500px]">
+        {/* Основная область - занимает оставшееся пространство */}
+        <div className="md:col-span-9 lg:col-span-10 h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-4 h-full">
+            {/* Верхний ряд - равная высота */}
+            <div className="h-full">
               <CalendarCard />
             </div>
             
-            <div className="h-full min-h-[400px] lg:min-h-[500px]">
+            <div className="h-full">
               <PlaceholderCard />
             </div>
             
-            {/* Нижний ряд */}
-            <div className="h-full min-h-[400px] lg:min-h-[500px]">
+            {/* Нижний ряд - равная высота */}
+            <div className="h-full">
               <NotebookCard />
             </div>
             
-            <div className="h-full min-h-[400px] lg:min-h-[500px]">
+            <div className="h-full">
               <CommunityCard />
             </div>
           </div>

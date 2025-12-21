@@ -190,73 +190,73 @@ const Index = () => {
   const currentFeaturedNotes = ALL_NOTES.filter(note => featuredNotes.has(note.id));
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="h-screen bg-background p-4 flex flex-col overflow-hidden">
       <TopBar />
       
-      <div className="flex gap-4 mt-4">
+      <div className="flex gap-4 mt-4 flex-1 min-h-0">
         <FeaturedSidebar 
           notes={currentFeaturedNotes} 
           onNoteClick={handleNoteClick}
           onRemoveFromFeatured={handleFeaturedToggle}
         />
       
-      <main className="flex-1 flex flex-col gap-4">
-        <div className="bg-card rounded-xl border border-border p-6">
-          <div className="flex items-center gap-4">
-            <SearchBar value={searchQuery} onChange={setSearchQuery} />
-            <SubjectFilter
-              subjects={SUBJECTS}
-              selectedSubjects={selectedSubjects}
-              onSubjectToggle={handleSubjectToggle}
-            />
+        <main className="flex-1 flex flex-col gap-4 min-h-0">
+          <div className="bg-card rounded-xl border border-border p-6 shrink-0">
+            <div className="flex items-center gap-4">
+              <SearchBar value={searchQuery} onChange={setSearchQuery} />
+              <SubjectFilter
+                subjects={SUBJECTS}
+                selectedSubjects={selectedSubjects}
+                onSubjectToggle={handleSubjectToggle}
+              />
+            </div>
+            
+            {selectedSubjects.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-4 animate-fade-in">
+                {selectedSubjects.map((subject) => (
+                  <Badge
+                    key={subject}
+                    variant="secondary"
+                    className="px-3 py-1.5 text-sm hover:bg-secondary/80 transition-all cursor-pointer group animate-scale-in"
+                    onClick={() => handleSubjectToggle(subject)}
+                  >
+                    <span>{subject}</span>
+                    <X className="h-3 w-3 ml-2 group-hover:scale-110 transition-transform" />
+                  </Badge>
+                ))}
+              </div>
+            )}
           </div>
-          
-          {selectedSubjects.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-4 animate-fade-in">
-              {selectedSubjects.map((subject) => (
-                <Badge
-                  key={subject}
-                  variant="secondary"
-                  className="px-3 py-1.5 text-sm hover:bg-secondary/80 transition-all cursor-pointer group animate-scale-in"
-                  onClick={() => handleSubjectToggle(subject)}
-                >
-                  <span>{subject}</span>
-                  <X className="h-3 w-3 ml-2 group-hover:scale-110 transition-transform" />
-                </Badge>
+
+          <div className="bg-card rounded-xl border border-border p-8 flex-1 overflow-y-auto min-h-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredNotes.map((note) => (
+                <NoteCard
+                  key={note.id}
+                  id={note.id}
+                  authorName={note.authorName}
+                  subject={note.subject}
+                  description={note.description}
+                  likes={note.likes}
+                  comments={note.comments}
+                  isLiked={likedNotes.has(note.id)}
+                  isFeatured={featuredNotes.has(note.id)}
+                  onClick={handleNoteClick}
+                  onLikeToggle={handleLikeToggle}
+                  onFeaturedToggle={handleFeaturedToggle}
+                />
               ))}
             </div>
-          )}
-        </div>
 
-        <div className="bg-card rounded-xl border border-border p-8 flex-1">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredNotes.map((note) => (
-              <NoteCard
-                key={note.id}
-                id={note.id}
-                authorName={note.authorName}
-                subject={note.subject}
-                description={note.description}
-                likes={note.likes}
-                comments={note.comments}
-                isLiked={likedNotes.has(note.id)}
-                isFeatured={featuredNotes.has(note.id)}
-                onClick={handleNoteClick}
-                onLikeToggle={handleLikeToggle}
-                onFeaturedToggle={handleFeaturedToggle}
-              />
-            ))}
+            {filteredNotes.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">
+                  Конспектов не найдено. Попробуйте изменить параметры поиска.
+                </p>
+              </div>
+            )}
           </div>
-
-          {filteredNotes.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">
-                Конспектов не найдено. Попробуйте изменить параметры поиска.
-              </p>
-            </div>
-          )}
-        </div>
-      </main>
+        </main>
       </div>
 
       <AlertDialog open={!!noteToRemove} onOpenChange={(open) => !open && setNoteToRemove(null)}>

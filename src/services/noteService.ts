@@ -2,7 +2,7 @@
 
 import { getHeaders } from './folderService'; 
 
-const API_BASE_URL = 'http://localhost:8085/api/notes';
+const API_BASE_URL = '/api/notes';
 
 // Интерфейс для конспекта (должен соответствовать NoteResponseDTO)
 export interface Note {
@@ -31,7 +31,7 @@ export interface NoteRequestDTO {
 // 1. ЗАГРУЗКА ВСЕХ КОНСПЕКТОВ (GET /api/notes)
 // ------------------------------------------------
 export async function fetchAllNotes(userId: string): Promise<Note[]> {
-    const API_BASE_URL = 'http://localhost:8085/api/notes';
+    const API_BASE_URL = '/api/notes';
     const url = `${API_BASE_URL}/user/${userId}`; 
     
     console.log(`Запрос конспектов: GET ${url} - noteService.ts:37`);

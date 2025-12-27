@@ -29,7 +29,7 @@
     "allowSyntheticDefaultImports": true
   },
   
-  "include": ["src"],
+  "include": ["src", "public/tinymce"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

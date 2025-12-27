@@ -163,10 +163,12 @@ export function NoteEditor({ note, folders, onSave, onDelete, onClose }: NoteEdi
           </header>
 
           <Editor
-            apiKey="vhtlvej7a1b638hcuweri8zgcalgijwllzcps13kt0btydv0"
+            // Указываем путь к локальному скрипту, который мы положили в public/libs
+            tinymceScriptSrc="/tinymce/tinymce.min.js"
             onInit={(evt, editor) => (editorRef.current = editor)}
             initialValue={note.content}
             init={{
+              license_key: 'gpl',
               height: 'calc(100vh - 280px)',
               menubar: 'edit insert format table help',
               plugins: [
@@ -188,7 +190,9 @@ export function NoteEditor({ note, folders, onSave, onDelete, onClose }: NoteEdi
                   margin: 20px auto;
                 }
               `,
+              // Указываем путь к теме и скинам вручную, чтобы редактор их не потерял
               skin: 'oxide',
+              content_css: 'default', 
               language: 'ru',
               branding: false,
               promotion: false

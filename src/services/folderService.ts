@@ -1,6 +1,6 @@
 // src/services/folderService.ts
 
-const API_BASE_URL = 'http://localhost:8085';
+const API_BASE_URL = ' ';
 
 // ------------------------------------------------
 // Функции для получения токена и userId из localStorage

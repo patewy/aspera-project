@@ -8,11 +8,14 @@ const ProfileCard = () => {
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
 
   const handleLogout = () => {
+    console.log("Выход...");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/auth");
+    localStorage.clear();
+    
+    // Это заставит React переинициализироваться и useAuth увидит, что токена нет
+    window.location.replace("/auth"); 
   };
-
   const goToProfile = () => {
     navigate("/profile"); // или "/my-profile", "/account" и т.д.
   };
